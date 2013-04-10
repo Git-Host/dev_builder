@@ -1,4 +1,24 @@
-{% load mezzanine_tags %}
-{% ifinstalled mezzanine.accounts %}
-<div class="panel">{% include "accounts/includes/user_panel.html" %}</div>
-{% endifinstalled %}
+{% load i18n future mezzanine_tags account %}
+
+<div class="panel">
+{% if request.user.is_authenticated %}
+	{% user_display user as user_display %}
+    {% trans "Logged in as: " %}
+    {{ user_display }}
+    {% if profile_url %}
+        <a href="{{ profile_url }}">{{ request.user.username }}</a><br>
+        <a href="{% url "profile_update" %}"
+            class="btn btn-small btn-account">{% trans "Update profile" %}</a>
+    {% else %}
+        <a href="{# url "profile_update" #}">{{ request.user.username }}</a>
+    {% endif %}
+    <a href="{% url 'account_logout' %}?next={{ request.path }}"
+        class="btn btn-small btn-danger btn-account">{% trans "Log out" %}</a>
+{% else %}
+    <a href="{% url 'account_login' %}?next={{ request.path }}"
+        class="btn btn-small btn-account">{% trans "Log in" %}</a>
+    {% trans "or" %}
+    <a href="{% url 'account_signup' %}?next={{ request.path }}"
+        class="btn btn-small btn-account">{% trans "Sign up" %}</a>
+{% endif %}
+</div>

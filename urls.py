@@ -4,6 +4,10 @@ from django.contrib import admin
 
 from mezzanine.core.views import direct_to_template
 
+# TODO: REMOVE BEFORE DEPLOY -- ENABLES SERVING OF MEDIA FILES
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 admin.autodiscover()
 
@@ -16,13 +20,16 @@ urlpatterns = patterns("",
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
     ("^admin/", include(admin.site.urls)),
-
+    
+    # Social Authentication URLs
+    (r"^accounts/", include("allauth.urls")),
+    
     # Cartridge URLs.
     ("^shop/", include("cartridge.shop.urls")),
     url("^account/orders/$", "cartridge.shop.views.order_history",
         name="shop_order_history"),
 
-     # We don't want to presume how your homepage works, so here are a
+    # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.
 
     # HOMEPAGE AS STATIC TEMPLATE
@@ -91,9 +98,16 @@ urlpatterns = patterns("",
 
     # ("^%s/" % settings.SITE_PREFIX, include("mezzanine.urls"))
 
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# TODO: REMOVE ABOVE LINE BEFORE DEPLOY -- ENABLES SERVING OF MEDIA FILES
 
 # Adds ``STATIC_URL`` to the context of error pages, so that error
 # pages can use JS, CSS and images.
 handler404 = "mezzanine.core.views.page_not_found"
 handler500 = "mezzanine.core.views.server_error"
+
+
+# TODO: REMOVE BEFORE DEPLOY.
+from apps.dynamicsites.views import site_info
+urlpatterns += patterns('',
+    url(r'^site-info$', site_info),)

@@ -153,6 +153,10 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
+# Hosts/domain names that are valid for this site.
+# "*" matches anything, ".example.com" matches example.com and all subdomains
+ALLOWED_HOSTS = ["*"]
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -181,7 +185,7 @@ SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
-USE_I18N = False
+USE_I18N = True
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = "19a59b5f-d795-4bc9-a9f8-09d65dd7f2a7cds4143f-0b26-4147-938a-1e1337fb508fbadb160e-82ef-4086-ba6e-5ccb2165557f"
@@ -197,7 +201,10 @@ TEMPLATE_LOADERS = (
     "django.template.loaders.app_directories.Loader",
 )
 
-AUTHENTICATION_BACKENDS = ("mezzanine.core.auth_backends.MezzanineBackend",)
+AUTHENTICATION_BACKENDS = (
+	#"mezzanine.core.auth_backends.MezzanineBackend",
+	"allauth.account.auth_backends.AuthenticationBackend",
+)
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -234,10 +241,13 @@ DATABASES = {
 # PATHS #
 #########
 
-import os
+import os, sys
 
 # Full filesystem path to the project.
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# Add apps folder to python path.
+sys.path.insert(0, os.path.join(PROJECT_ROOT, 'apps'))
 
 # Name of the directory for the project.
 PROJECT_DIRNAME = PROJECT_ROOT.split(os.sep)[-1]
@@ -273,7 +283,9 @@ ROOT_URLCONF = "%s.urls" % PROJECT_DIRNAME
 # or "C:/www/django/templates".
 # Always use forward slashes, even on Windows.
 # Don't forget to use absolute paths, not relative paths.
-TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
+TEMPLATE_DIRS = (
+	os.path.join(PROJECT_ROOT, "templates"),
+)
 
 
 ################
@@ -289,6 +301,17 @@ INSTALLED_APPS = (
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "django.contrib.staticfiles",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    #"allauth.socialaccount.providers.dropbox",
+    "allauth.socialaccount.providers.facebook",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.linkedin",
+    "allauth.socialaccount.providers.openid",
+    "allauth.socialaccount.providers.persona",
+    "allauth.socialaccount.providers.soundcloud",
+    "allauth.socialaccount.providers.twitter",
     "cartridge.shop",
     "mezzanine.boot",
     "mezzanine.conf",
@@ -299,8 +322,10 @@ INSTALLED_APPS = (
     "mezzanine.pages",
     "mezzanine.galleries",
     "mezzanine.twitter",
-    "mezzanine.accounts",
-    #"mezzanine.mobile",
+    #"mezzanine.accounts",
+    "dynamicsites",
+    "redactor",
+    "affiliates",
 )
 
 # List of processors used by RequestContext to populate the context.
@@ -316,6 +341,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.core.context_processors.tz",
     "mezzanine.conf.context_processors.settings",
+    "dynamicsites.context_processors.current_site",
+    "allauth.account.context_processors.account",
+    "allauth.socialaccount.context_processors.socialaccount",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
@@ -339,6 +367,8 @@ MIDDLEWARE_CLASSES = (
     # "mezzanine.core.middleware.SSLRedirectMiddleware",
     "mezzanine.pages.middleware.PageMiddleware",
     "mezzanine.core.middleware.FetchFromCacheMiddleware",
+    "dynamicsites.middleware.DynamicSitesMiddleware",
+    "affiliates.middleware.AffiliateMiddleware",
 )
 
 
@@ -388,14 +418,59 @@ from mezzanine.utils.conf import set_dynamic_settings
 set_dynamic_settings(globals())
 
 
+#################
+# DYNAMIC SITES #
+#################
+
+SITES_DIR = os.path.join(PROJECT_ROOT, "sites")
+DEFAULT_HOST = "builder.local"
+HOSTNAME_REDIRECTS = {
+#    "redirect-src-1.co.nz":         "www.redirect-dest-1.co.nz",
+}
+
+
+###############
+# SOCIAL AUTH #
+###############
+ 
+ACCOUNT_EMAIL_REQUIRED = True
+# ("mandatory" | "optional" | "none")
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_SIGNUP_FORM_CLASS = "accounts.forms.SignupForm"
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = False
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_LOGOUT_ON_GET = False
+
+
 ##########
 # EMAIL # 
 ##########
 
-EMAIL_BACKEND = 'django_ses.SESBackend' 
-EMAIL_HOST_USER = 'corbinchild@avant-garde.co.nz'
+EMAIL_HOST_USER = "corbinchild@avant-garde.co.nz"
 EMAIL_USE_TLS = True 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = 'rfV^0SeFdj5mu3vJV%57W2V4'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_PASSWORD = "rfV^0SeFdj5mu3vJV%57W2V4"
 EMAIL_PORT = 587
 SEND_BROKEN_LINK_EMAILS = True
+
+
+###########
+# LOGGING # 
+###########
+
+import logging
+if DEBUG:
+    # will output to your console
+    logging.basicConfig(
+        level = logging.DEBUG,
+        format = '%(asctime)s %(levelname)s %(message)s',
+    )
+else:
+    # will output to logging file
+    logging.basicConfig(
+        level = logging.DEBUG,
+        format = '%(asctime)s %(levelname)s %(message)s',
+        filename = '/var/www/public_html/dev_builder/log_file.log',
+        filemode = 'a'
+    )

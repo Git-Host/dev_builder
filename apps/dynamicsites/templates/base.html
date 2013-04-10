@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#errors {
+    color: red;
+    font-weight: bolder;
+}
+</style>
+{% block header %}
+{% endblock header %}
+</head>
+<body>
+
+<div id='errors'>
+{% block error_header %}
+{% endblock %}
+</div>
+
+<div id='content'>
+{% block content %}
+{% endblock %}
+</div>
+
+</body>
