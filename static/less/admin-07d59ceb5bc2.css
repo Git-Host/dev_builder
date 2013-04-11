@@ -1,0 +1,124 @@
+/* ==========================================================================
+   ADMIN STYLESHEET  
+   LESS is compiled by Django on page load.
+   ========================================================================== */
+#login {
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  max-width: 400px;
+}
+#login ul {
+  display: block;
+  width: 100%;
+}
+#login ul li {
+  margin-bottom: 10px;
+  padding: 6px 8px 6px 8px;
+  list-style: none;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  border: 1px solid #aaaaaa;
+}
+#login ul li.error {
+  border: 1px solid #b12b12;
+}
+#login ul input,
+#login ul textarea {
+  width: 100%;
+  color: #555555;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  border: none;
+  outline: none;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+#login ul input {
+  height: 26px;
+}
+#login ul textarea {
+  height: 150px;
+}
+#login ul input::-webkit-input-placeholder,
+#login ul textarea::-webkit-input-placeholder {
+  color: #aaaaaa;
+}
+#login ul input:-moz-placeholder,
+#login ul textarea:-moz-placeholder {
+  color: #555555;
+}
+#login ul input::-moz-placeholder,
+#login ul textarea::-moz-placeholder {
+  color: #555555;
+}
+#login ul input:-ms-input-placeholder,
+#login ul textarea:-ms-input-placeholder {
+  color: #555555;
+}
+#login ul li.error input::-webkit-input-placeholder,
+#login ul li.error textarea::-webkit-input-placeholder {
+  color: #b12b12;
+}
+#login ul li.error input:-moz-placeholder,
+#login ul li.error textarea:-moz-placeholder {
+  color: #b12b12;
+}
+#login ul li.error input::-moz-placeholder,
+#login ul li.error textarea::-moz-placeholder {
+  color: #b12b12;
+}
+#login ul li.error input:-ms-input-placeholder,
+#login ul li.error textarea:-ms-input-placeholder {
+  color: #b12b12;
+}
+#login button {
+  float: right;
+}
+#login .radio,
+#login #reset {
+  font-size: 12px;
+  font-weight: 300;
+}
+label,
+input {
+  vertical-align: middle;
+}
+label {
+  margin: 0 20px 0 3px;
+}
+button {
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(5%, #333333), color-stop(100%, #111111));
+  background: -moz-linear-gradient(center top, #333333 5%, #111111 100%);
+  background: -ms-linear-gradient(top, #333333 5%, #111111 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#111111');
+  border: 1px solid #444444;
+  padding: 9px 18px;
+  text-decoration: none;
+  background-color: #333333;
+  color: #444;
+  display: inline-block;
+}
+button:hover {
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(5%, #111111), color-stop(100%, #333333));
+  background: -moz-linear-gradient(center top, #111111 5%, #333333 100%);
+  background: -ms-linear-gradient(top, #111111 5%, #333333 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#111111', endColorstr='#333333');
+  background-color: #111111;
+}
+button:active {
+  position: relative;
+  top: 1px;
+}
