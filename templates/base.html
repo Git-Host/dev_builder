@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
-{% load pages_tags mezzanine_tags i18n future staticfiles %}
-{% load url from future %}
+{% load pages_tags mezzanine_tags i18n future staticfiles less %}
 <head>
 
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
@@ -19,7 +18,9 @@
 {% compress css %}
 <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
 <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
+<link rel="stylesheet" href="{{ STATIC_URL }}{% less "less/main.less" %}" />
 <link rel="stylesheet" href="{% static "css/bootstrap-responsive.css" %}">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700' rel='stylesheet' type='text/css'>
 {% if LANGUAGE_BIDI %}
 <link rel="stylesheet" href="{% static "css/rtl.css" %}">
 {% endif %}

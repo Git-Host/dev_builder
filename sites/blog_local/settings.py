@@ -11,5 +11,6 @@ MEDIA_URL = os.sep + os.path.normpath(MEDIA_URL) + os.sep
 # Set this so that when we run collectstatic,
 # user edited files will get pulled in.
 STATICFILES_DIRS = (
-    os.path.join(SITE_PATH, "static") 
+	os.path.join(settings.PROJECT_ROOT, "static"),
+    os.path.join(SITE_PATH, "static")
 )

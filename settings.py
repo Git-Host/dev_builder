@@ -8,10 +8,10 @@
 # out, for convenient overriding.
 
 # Sequence of available credit card types for payment.
-# SHOP_CARD_TYPES = ("Mastercard", "Visa", "Diners", "Amex")
+SHOP_CARD_TYPES = ("Mastercard", "Visa")
 
 # Setting to turn on featured images for shop categories. Defaults to False.
-# SHOP_CATEGORY_USE_FEATURED_IMAGE = True
+SHOP_CATEGORY_USE_FEATURED_IMAGE = True
 
 # Set an alternative OrderForm class for the checkout process.
 # SHOP_CHECKOUT_FORM_CLASS = 'cartridge.shop.forms.OrderForm'
@@ -206,12 +206,15 @@ AUTHENTICATION_BACKENDS = (
 	"allauth.account.auth_backends.AuthenticationBackend",
 )
 
+LOGIN_REDIRECT_URL = "/admin/"
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #"django.contrib.staticfiles.finders.DefaultStorageFinder",
+	"less.finders.LessFinder",
 )
 
 
@@ -324,6 +327,7 @@ INSTALLED_APPS = (
     "mezzanine.twitter",
     #"mezzanine.accounts",
     "dynamicsites",
+    "less",
     "redactor",
     "affiliates",
 )
@@ -427,6 +431,13 @@ DEFAULT_HOST = "builder.local"
 HOSTNAME_REDIRECTS = {
 #    "redirect-src-1.co.nz":         "www.redirect-dest-1.co.nz",
 }
+
+
+################
+# ADMIN EDITOR #
+################
+
+RICHTEXT_WIDGET_CLASS = "redactor.widgets.RedactorEditor"
 
 
 ###############

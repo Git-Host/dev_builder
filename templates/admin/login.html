@@ -1,0 +1,41 @@
+{% extends "admin/base_site.html" %}
+{% load i18n future staticfiles %}
+
+{% block bodyclass %}login{% endblock %}
+{% block content_title %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="errornote">{{ error }}</p>
+{% endfor %}
+{% endif %}
+{% if no_site_permission %}
+<p class="errornote">{% trans "You don't have permission to access the admin for this site." %}</p>
+{% endif %}
+
+<form action="{{ app_path }}" method="post" id="login">
+    {% csrf_token %}
+    <ul>
+        <li id="username">
+            <input type="text" name="username" id="username_input" class="required" placeholder="{% trans 'Username or email' %}" value="{{ request.POST.username }}">
+        </li>
+        <li id="password">
+            <input type="password" name="password" placeholder="{% trans 'Password' %}">
+            <input type="hidden" name="this_is_the_login_form" value="1" />
+        </li>
+    </ul>
+    <button type="submit">{% trans 'Login' %}</button>
+    <input type="radio" name="mezzanine_login_interface" id="interface_admin"
+        value="admin"{% if request.REQUEST.mezzanine_login_interface != "site" %} checked{% endif %} />
+    <label class="radio" for="interface_admin">{% trans "Admin" %}</label>
+    <input type="radio" name="mezzanine_login_interface" id="interface_site"
+        value="site"{% if request.REQUEST.mezzanine_login_interface == "site" %} checked{% endif %} />
+    <label class="radio" for="interface_site">{% trans "Website" %}</label><br />
+    <a id="reset" href="{% url "password_reset" %}">{% trans "Forgot password?" %}</a>
+</form>
+
+{% endblock %}
+
