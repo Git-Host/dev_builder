@@ -34,7 +34,7 @@
     <input type="radio" name="mezzanine_login_interface" id="interface_site"
         value="site"{% if request.REQUEST.mezzanine_login_interface == "site" %} checked{% endif %} />
     <label class="radio" for="interface_site">{% trans "Website" %}</label><br />
-    <a id="reset" href="{% url "password_reset" %}">{% trans "Forgot password?" %}</a>
+    <a id="reset" href="{% url "password_reset" %}">{% trans "Reset your password" %}</a>
 </form>
 
 {% endblock %}

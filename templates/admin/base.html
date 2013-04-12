@@ -9,8 +9,13 @@
 
 <!-- STYLESHEETS / EXTRASTYLE -->
 {% block stylesheets %}
+
+	<!--JUST FOR DEV-->
+	<link rel="stylesheet" type="text/css" href="{% static "cache/admin.css" %}" />
+	<!--JUST FOR DEV-->
+	
     <link rel="stylesheet" type="text/css" href="{% static "grappelli/css/base.css" %}" />
-    <link rel="stylesheet" href="{{ STATIC_URL }}{% less "less/admin.less" %}" />
+    <!--<link rel="stylesheet" href="{{ STATIC_URL }}{% less "less/admin.less" %}" />-->
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700' rel='stylesheet' type='text/css'>
 {% endblock %}
 {% block extrastyle %}{% endblock %}

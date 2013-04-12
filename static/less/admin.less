@@ -60,22 +60,22 @@
 		
 		input::-webkit-input-placeholder,
 		textarea::-webkit-input-placeholder {
-			color: @light-grey;
+			color: lighten(@light-grey, 15%);
 		}
 		
 		input:-moz-placeholder,
 		textarea:-moz-placeholder {
-			color: @light-grey;
+			color: lighten(@light-grey, 15%);
 		}
 		
 		input::-moz-placeholder,
 		textarea::-moz-placeholder {
-			color: @light-grey;
+			color: lighten(@light-grey, 15%);
 		}
 		
 		input:-ms-input-placeholder,
 		textarea:-ms-input-placeholder {
-			color: @light-grey;
+			color: lighten(@light-grey, 15%);
 		}
 		
 		li.error input::-webkit-input-placeholder,
@@ -105,17 +105,13 @@
 	
 	.radio,
 	#reset {
-		.body-font(12px, 400, 16px);
+		.body-font(13px, 400, 20px);
 	}	
 }
 
-label,
-input {
+.radio {
+	margin: 0 15px 0 3px;
 	vertical-align: middle;
-}
-
-label {
-	margin: 0 20px 0 3px;
 }
 
 button {
@@ -126,7 +122,7 @@ button {
 	padding: 9px 18px;
 	text-decoration: none;
 	background-color: #333333;
-	color: @grey;
+	color: @white;
 	display: inline-block;
 }
 

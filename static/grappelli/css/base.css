@@ -24,7 +24,7 @@
 
 /*  Loads background-gradients for webkit browsers (Safari etc.)
     Comment out the following css-import if you want to use Grappelli without gradients */
-@import url('webkit-gradients.css');
+/*@import url('webkit-gradients.css');*/
 
 
 

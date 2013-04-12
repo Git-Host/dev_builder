@@ -437,6 +437,7 @@ HOSTNAME_REDIRECTS = {
 ###############
 
 LESS_ROOT = os.path.join(PROJECT_ROOT, "static")
+LESS_OUTPUT_DIR = "cache"
 
 
 ################

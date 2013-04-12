@@ -16,9 +16,14 @@
 {% endifinstalled %}
 
 {% compress css %}
+
+<!--JUST FOR DEV-->
+<link rel="stylesheet" href="cache/main.css" />
+<!--JUST FOR DEV-->
+
 <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
 <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
-<link rel="stylesheet" href="{{ STATIC_URL }}{% less "less/main.less" %}" />
+<!--<link rel="stylesheet" href="{{ STATIC_URL }}{% less "less/main.less" %}" />-->
 <link rel="stylesheet" href="{% static "css/bootstrap-responsive.css" %}">
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700' rel='stylesheet' type='text/css'>
 {% if LANGUAGE_BIDI %}
