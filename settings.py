@@ -432,6 +432,13 @@ HOSTNAME_REDIRECTS = {
 }
 
 
+###############
+# SOCIAL AUTH #
+###############
+
+LESS_ROOT = os.path.join(PROJECT_ROOT, "static")
+
+
 ################
 # ADMIN EDITOR #
 ################
