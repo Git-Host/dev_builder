@@ -1,0 +1,141 @@
+/* ==========================================================================
+	 ADMIN STYLESHEET
+	 ========================================================================== */
+
+// LESS is compiled by Django on page load.
+
+// Initialise.
+@import "lesshat";
+
+.body-font(@size:16px, @weight:400, @height:24px) {
+	font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: @size;
+	font-weight: @weight;
+	line-height: @height;
+}	
+
+// Variables.
+@white: #FFF;
+@light-grey: #AAA;
+@grey: #555;
+@red: #B12B12;
+
+// Styles.
+#login {
+	max-width: 400px;
+
+	ul {
+		display: block;
+		width: 100%;
+	
+		li {
+			margin-bottom: 10px;
+			padding: 6px 8px 6px 8px;
+			list-style: none;
+			.border-radius(3px);
+			border: 1px solid @light-grey;
+		}
+		
+		li.error {
+			border: 1px solid @red;
+		}
+		
+		input,
+		textarea {
+			width: 100%;
+			color: @grey;
+			.body-font;
+			border: none;
+			outline: none;
+			.box-sizing(border-box);
+		}
+		
+		input {
+			height: 26px;
+		}
+		
+		textarea {
+			height: 150px;
+		}
+		
+		input::-webkit-input-placeholder,
+		textarea::-webkit-input-placeholder {
+			color: @light-grey;
+		}
+		
+		input:-moz-placeholder,
+		textarea:-moz-placeholder {
+			color: @light-grey;
+		}
+		
+		input::-moz-placeholder,
+		textarea::-moz-placeholder {
+			color: @light-grey;
+		}
+		
+		input:-ms-input-placeholder,
+		textarea:-ms-input-placeholder {
+			color: @light-grey;
+		}
+		
+		li.error input::-webkit-input-placeholder,
+		li.error textarea::-webkit-input-placeholder {
+			color: @red;
+		}
+		
+		li.error input:-moz-placeholder,
+		li.error textarea:-moz-placeholder {
+			color: @red;
+		}
+		
+		li.error input::-moz-placeholder,
+		li.error textarea::-moz-placeholder {
+			color: @red;
+		}
+		
+		li.error input:-ms-input-placeholder,
+		li.error textarea:-ms-input-placeholder {
+			color: @red;
+		}
+	}
+	
+	button {
+		float: right;
+	}
+	
+	.radio,
+	#reset {
+		.body-font(12px, 400, 16px);
+	}	
+}
+
+label,
+input {
+	vertical-align: middle;
+}
+
+label {
+	margin: 0 20px 0 3px;
+}
+
+button {
+	.body-font(16px, 400, 18px);
+	.border-radius(20px);
+	.gradient(~"linear-gradient(180deg, #333 5%,#111 100%)");
+	border: 1px solid #444444;
+	padding: 9px 18px;
+	text-decoration: none;
+	background-color: #333333;
+	color: @grey;
+	display: inline-block;
+}
+
+button:hover {
+	.gradient(~"linear-gradient(180deg, #111 5%,#333 100%)");
+	background-color: #111111;
+}
+
+button:active {
+	position: relative;
+	top: 1px;
+}
