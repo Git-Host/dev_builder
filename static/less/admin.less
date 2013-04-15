@@ -8,43 +8,102 @@
 @import "lesshat";
 
 .body-font(@size:16px, @weight:400, @height:24px) {
-	font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: @size;
 	font-weight: @weight;
 	line-height: @height;
 }	
 
 // Variables.
+@bg: #FFF;
+@inverted-bg: #111;
 @white: #FFF;
-@light-grey: #AAA;
-@grey: #555;
-@red: #B12B12;
+@text: #555;
+@light-text: #C3C3C3;
+@inverted-text: #888;
+@attention: #B12B12;
 
 // Styles.
+input[type=radio],
+input[type=checkbox] {
+	display: none;
+	margin-top: 0;
+}
+
+input[type=radio] + label:before,
+input[type=checkbox] + label:before {
+	content: "";
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	margin: 2px 8px 0 0;
+	float: left;
+	background-color: #CCC;
+	box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .6);
+}
+
+input[type=radio] + label:before {
+	.border-radius(8px);
+}
+
+input[type=checkbox] + label:before {
+    .border-radius(3px);
+}
+
+input[type=radio]:checked + label:before {
+    content: "\2022";
+    color: #F5F5F5;
+    font-size: 26px;
+    text-align: center;
+    line-height: 14px;
+}
+
+input[type=checkbox]:checked + label:before {
+	content: "\2713";
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+	font-size: 15px;
+	color: #F5F5F5;
+	text-align: center;
+    line-height: 15px;
+}
+
+.login {
+	background: #111;
+}
+
 #login {
-	max-width: 400px;
+	max-width: 350px;
+	margin: 15% auto;
+	padding: 120px 40px 40px 40px;
+	background: #F5F5F5;
+	.border-radius(5px);
+	border: 1px solid #CCC;
 
 	ul {
 		display: block;
 		width: 100%;
+		margin: 0;
 	
 		li {
-			margin-bottom: 10px;
-			padding: 6px 8px 6px 8px;
+			margin-bottom: 15px;
+			padding: 6px;
 			list-style: none;
 			.border-radius(3px);
-			border: 1px solid @light-grey;
+			border: 1px solid @light-text;
+			background: #FFF;
 		}
 		
 		li.error {
-			border: 1px solid @red;
+			border: 1px solid @attention;
 		}
 		
 		input,
 		textarea {
 			width: 100%;
-			color: @grey;
+			margin: 0;
+			color: @text;
 			.body-font;
+			.box-shadow(~"none");
 			border: none;
 			outline: none;
 			.box-sizing(border-box);
@@ -60,78 +119,81 @@
 		
 		input::-webkit-input-placeholder,
 		textarea::-webkit-input-placeholder {
-			color: lighten(@light-grey, 15%);
+			color: @light-text;
 		}
 		
 		input:-moz-placeholder,
 		textarea:-moz-placeholder {
-			color: lighten(@light-grey, 15%);
+			color: @light-text;
 		}
 		
 		input::-moz-placeholder,
 		textarea::-moz-placeholder {
-			color: lighten(@light-grey, 15%);
+			color: @light-text;
 		}
 		
 		input:-ms-input-placeholder,
 		textarea:-ms-input-placeholder {
-			color: lighten(@light-grey, 15%);
+			color: @light-text;
 		}
 		
 		li.error input::-webkit-input-placeholder,
 		li.error textarea::-webkit-input-placeholder {
-			color: @red;
+			color: @attention;
 		}
 		
 		li.error input:-moz-placeholder,
 		li.error textarea:-moz-placeholder {
-			color: @red;
+			color: @attention;
 		}
 		
 		li.error input::-moz-placeholder,
 		li.error textarea::-moz-placeholder {
-			color: @red;
+			color: @attention;
 		}
 		
 		li.error input:-ms-input-placeholder,
 		li.error textarea:-ms-input-placeholder {
-			color: @red;
+			color: @attention;
 		}
 	}
 	
-	button {
-		float: right;
-	}
-	
+	.checkbox,
 	.radio,
 	#reset {
-		.body-font(13px, 400, 20px);
+		.body-font(11px, 400, 16px);
+	}
+	
+	.checkbox,
+	.radio {
+		display: inline-block;
+		margin-right: 15px;
+		padding-left: 0;
+		color: @text;
+	}
+	
+	button,
+	#reset {
+		float: right;
+		clear: right;
+	}
+	
+	#reset {
+		margin-bottom: 15px;
+	}
+		
+	button {
+		.body-font(13px, 400, 16px);
+		.border-radius(20px);
+		padding: 6px 16px 8px 16px;
 	}	
-}
-
-.radio {
-	margin: 0 15px 0 3px;
-	vertical-align: middle;
-}
-
-button {
-	.body-font(16px, 400, 18px);
-	.border-radius(20px);
-	.gradient(~"linear-gradient(180deg, #333 5%,#111 100%)");
-	border: none;
-	padding: 9px 18px;
-	text-decoration: none;
-	background-color: #333333;
-	color: @white;
-	display: inline-block;
-}
-
-button:hover {
-	.gradient(~"linear-gradient(180deg, #111 5%,#333 100%)");
-	background-color: #111111;
-}
-
-button:active {
-	position: relative;
-	top: 1px;
+	
+	@media (max-width: 480px) {
+	
+		#reset,
+		button {
+			float: left;
+			clear: left;
+		}
+	}
 }

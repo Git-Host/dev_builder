@@ -325,8 +325,9 @@ INSTALLED_APPS = (
     "mezzanine.galleries",
     "mezzanine.twitter",
     #"mezzanine.accounts",
-    "dynamicsites",
+    "dynamic_sites",
     "less",
+    "user_admin",
     "redactor",
     "affiliates",
 )
@@ -344,7 +345,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.core.context_processors.tz",
     "mezzanine.conf.context_processors.settings",
-    "dynamicsites.context_processors.current_site",
+    "dynamic_sites.context_processors.current_site",
     "allauth.account.context_processors.account",
     "allauth.socialaccount.context_processors.socialaccount",
 )
@@ -370,7 +371,7 @@ MIDDLEWARE_CLASSES = (
     # "mezzanine.core.middleware.SSLRedirectMiddleware",
     "mezzanine.pages.middleware.PageMiddleware",
     "mezzanine.core.middleware.FetchFromCacheMiddleware",
-    "dynamicsites.middleware.DynamicSitesMiddleware",
+    "dynamic_sites.middleware.DynamicSitesMiddleware",
     "affiliates.middleware.AffiliateMiddleware",
 )
 
@@ -432,24 +433,17 @@ HOSTNAME_REDIRECTS = {
 }
 
 
-###############
-# SOCIAL AUTH #
-###############
+###################
+# LESS PROCESSING #
+###################
 
 LESS_ROOT = os.path.join(PROJECT_ROOT, "static")
 LESS_OUTPUT_DIR = "cache"
 
 
-################
-# ADMIN EDITOR #
-################
-
-RICHTEXT_WIDGET_CLASS = "redactor.widgets.RedactorEditor"
-
-
-###############
-# SOCIAL AUTH #
-###############
+##################
+# AUTHENTICATION #
+##################
  
 ACCOUNT_EMAIL_REQUIRED = True
 # ("mandatory" | "optional" | "none")
@@ -459,6 +453,13 @@ ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = False
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_LOGOUT_ON_GET = False
+
+
+################
+# ADMIN EDITOR #
+################
+
+RICHTEXT_WIDGET_CLASS = "redactor.widgets.RedactorEditor"
 
 
 ##########

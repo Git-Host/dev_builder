@@ -8,15 +8,17 @@
 {% load staticfiles i18n grp_tags less %}
 
 <!-- STYLESHEETS / EXTRASTYLE -->
-{% block stylesheets %}
-
-	<!--JUST FOR DEV-->
+{% block stylesheets %}	
+	<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+	<link rel="stylesheet" href="{% static "css/bootstrap-responsive.css" %}">
+    <!--<link rel="stylesheet" type="text/css" href="{% static "grappelli/css/base.css" %}" />-->
+    <!--<link rel="stylesheet" href="{{ STATIC_URL }}{% less "less/admin.less" %}" />-->
+    
+    <!--JUST FOR DEV-->
 	<link rel="stylesheet" type="text/css" href="{% static "cache/admin.css" %}" />
 	<!--JUST FOR DEV-->
-	
-    <link rel="stylesheet" type="text/css" href="{% static "grappelli/css/base.css" %}" />
-    <!--<link rel="stylesheet" href="{{ STATIC_URL }}{% less "less/admin.less" %}" />-->
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,700' rel='stylesheet' type='text/css'>
+    
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,300,400,600,700,800' rel='stylesheet' type='text/css'>
 {% endblock %}
 {% block extrastyle %}{% endblock %}
 
@@ -43,7 +45,7 @@
 <div id="container">
 
     <!-- HEADER -->
-    {% if not is_popup %}
+    {% if not is_popup and request.user.is_authenticated %}
     {% include "admin/includes_grappelli/header.html" %}
     {% endif %}
 

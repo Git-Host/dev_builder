@@ -1,6 +1,6 @@
-
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from user_admin.admin import user_admin_site
 
 from mezzanine.core.views import direct_to_template
 
@@ -19,7 +19,8 @@ urlpatterns = patterns("",
 
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
-    ("^admin/", include(admin.site.urls)),
+    url("^admin/", include(admin.site.urls)),
+    url(r"^config/", include(user_admin_site.urls)),
     
     # Social Authentication URLs
     (r"^accounts/", include("allauth.urls")),
@@ -108,6 +109,6 @@ handler500 = "mezzanine.core.views.server_error"
 
 
 # TODO: REMOVE BEFORE DEPLOY.
-from apps.dynamicsites.views import site_info
+from apps.dynamic_sites.views import site_info
 urlpatterns += patterns('',
     url(r'^site-info$', site_info),)
